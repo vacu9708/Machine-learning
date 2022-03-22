@@ -71,4 +71,4 @@ def show_data_by_text(arr):
 #show_data(x_train[image_index]) # Check the learned data
 ~~~
 ## Output
-![image](https://user-images.githubusercontent.com/67142421/159577692-6e288444-2600-412e-9050-815abd023218.png)
+![image](https://user-images.githubusercontent.com/67142421/159577893-44b70daf-aae2-42a5-b585-7dc096991099.png)
