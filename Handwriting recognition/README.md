@@ -38,9 +38,8 @@ model.add(layers.Dense(10, activation='softmax')) # Last layer is a softmax laye
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
-
-model.fit(x_train, y_train, epochs=2) # "Fit" the model to the training data:
 #-----
+model.fit(x_train, y_train, epochs=2) # "Fit" the model to the training data in compile
 
 model.summary()
 
