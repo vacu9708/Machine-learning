@@ -25,7 +25,8 @@ x_test = x_test.reshape(x_test.shape[0], 28, 28, 1) / 255
 # Create a neural network
 model = Sequential() # One of the two models of Keras.
 model.add(layers.InputLayer(input_shape=(28, 28, 1))) # Single layer
-'''model.add(layers.Conv2D(28, kernel_size=(3,3), input_shape=(28, 28, 1))) # CNN newral network
+'''CNN newral network that has 28 kernel filters which are 3 by 3 where  image_height=32, image_width=32, and color_channels is 1
+model.add(layers.Conv2D(28, kernel_size=(3,3), input_shape=(28, 28, 1)))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))'''
 model.add(layers.Flatten()) # Convert the layer to a 1 dimensional array
 model.add(layers.Dense(128, activation='relu')) # First danse layer has 64 neurons.
@@ -38,13 +39,14 @@ model.add(layers.Dense(10, activation='softmax')) # Last layer is a softmax laye
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
+
+model.fit(x_train, y_train, epochs=5) # "Fit" the model to the training data:
 #-----
-model.fit(x_train, y_train, epochs=2) # "Fit" the model to the training data in compile
 
 model.summary()
 
 # Evaluate accuracy
-test_loss, test_acc = model.evaluate(x_train, y_train, verbose=2)
+test_loss, test_acc = model.evaluate(x_train, y_train, verbose=0)
 print('\nTest accuracy:', test_acc)
 #-----
 
@@ -52,7 +54,7 @@ print('\nTest accuracy:', test_acc)
 image_index = 1
 predictions = model.predict(x_test)
 print(predictions[image_index])
-print('This image is very likely to be : {}'.format(np.argmax(predictions[image_index])))
+print('==========\nThis image is very likely to be : {}'.format(np.argmax(predictions[image_index])))
 
 plt.imshow(x_test[image_index].reshape(28, 28),cmap='Greys')
 plt.show()
