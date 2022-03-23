@@ -64,7 +64,7 @@ def show_data_by_text(arr):
     reshape_data = arr.reshape(-1, )
     for index, data in enumerate(reshape_data):
         print('{:3d}'.format(data), end='') # {:3d} = Calculate to 3 decimal places.
-        if index % 28 == 27: # 마지막 column이면 줄바꿈
+        if index % 28 == 27: # Line break if it is the last column
             print()
 
 #show_data(x_train[image_index]) # Check the learned data
