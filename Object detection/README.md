@@ -5,7 +5,7 @@ import numpy as np
 # Initilization
 LABELS = open('weights/coco.txt').read().strip().split("\n")
 image = cv2.imread('media/calling_man.jpg')
-model_path = 'weights/coco.onnx'
+model_path = 'weights/yolov5s.onnx'
 net = cv2.dnn.readNet(model_path)
 layer_name = net.getLayerNames()
 layer_name = [layer_name[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -15,7 +15,7 @@ np.random.seed(4)
 COLORS = np.random.randint(0, 255, size=(len(LABELS), 3), dtype="uint8")
 #-----
 
-CONFIDENCE_THRESHOLD = 0.5
+CONFIDENCE_THRESHOLD = 0.35
 def make_final_boxes(image, boxes, probabilities, classIDs):
     (original_image_height, original_image_width) = image.shape[:2] # Take the height and width of the original image.
     
@@ -37,9 +37,9 @@ def make_final_boxes(image, boxes, probabilities, classIDs):
         y_factor = original_image_height / YOLO_SIZE
 
         (left_x, top_y) = ( int(boxes[i][0] * x_factor), int(boxes[i][1] * y_factor) )
-        (width, height) = ( int(boxes[i][2] * x_factor), int(boxes[i][3] * y_factor) )
+        (right_x, bottom_y) = ( int(boxes[i][2] * x_factor), int(boxes[i][3] * y_factor) )
 
-        cv2.rectangle(image, (left_x, top_y, width, height), color, 2) # Bounding box
+        cv2.rectangle(image, (left_x, top_y), (right_x, bottom_y), color, 2) # Bounding box
         text = "{}: {:.2f}%".format(LABELS[classIDs[i]], probabilities[i]*100)
         #text = "{}: {:.2f}%".format('INCHEON UNIVERSITY', probabilities[i]*100)
         cv2.putText(image, text, (left_x, top_y - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
@@ -65,7 +65,7 @@ def initial_detection(image):
         candidate_probabilites = anchor_box[5:] # An anchor box has class probabilites from index 5.
         classID = np.argmax(candidate_probabilites) # Determine the most likely class.
         probability_of_most_likely_class = candidate_probabilites[classID]
-        confidence = anchor_box[4] # Confidence means the probability that the found class is correct.
+        confidence = anchor_box[4] # Class probabilites are conditional probabilities by the confidence.
         # It turns out each grid box gets an anchor box 3 times thssat gets bigger in each creation.
         # Anchor boxes are the biggest in the 1st layer and get small in each layer.
         # and it turns out that each anchor box has probabilities of all the classes.
@@ -75,9 +75,9 @@ def initial_detection(image):
             # Update our list of bounding boxes, confidences, and class IDs
             (center_x, center_y, width, height) = anchor_box[0:4]
             # Use the center coordinates to derive the top and left corner of the bounding box.
-            left_x = center_x - (width / 2)
-            top_y = center_y - (height / 2)
-            boxes.append([left_x, top_y, width, height])
+            left_x, top_y = center_x - (width / 2), center_y - (height / 2)
+            right_x, bottom_y = center_x + (width / 2), center_y + (height / 2)
+            boxes.append([left_x, top_y, right_x, bottom_y])
             probabilites.append(probability_of_most_likely_class)
             classIDs.append(classID)
         
