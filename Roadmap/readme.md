@@ -1,7 +1,6 @@
 ## Machine Learning Roadmap
 
 ### 1. **Prerequisites**
-
 #### 1.1 Mathematics
 - **Linear Algebra**:
   - Vectors, Matrices, Eigenvalues and Eigenvectors
@@ -53,42 +52,6 @@
 - LSTM (Long Short-Term Memory)
 - GRU (Gated Recurrent Units)
 
-### 4. **Advanced Machine Learning Topics**
-
-#### 4.1 Object Detection
-- R-CNN, Fast R-CNN, Faster R-CNN
-- SSD (Single Shot Multibox Detector)
-- YOLO (You Only Look Once)
-
-#### 4.2 Audio Recognition
-- MFCC (Mel Frequency Cepstral Coefficients)
-- Deep Learning Models for Audio: CNNs, RNNs
-
-#### 4.3 Image Segmentation
-- Semantic Segmentation vs Instance Segmentation
-- U-Net, Mask R-CNN
-
-#### 4.4 Generative AI
-- **Generative Adversarial Networks (GANs)**
-- Variational Autoencoders (VAEs)
-- Style Transfer
-
 ### 5. **Frameworks and Tools**
 - **TensorFlow and Keras**
 - **PyTorch**
-
-### 6. **Additional Resources**
-- Books:
-  - "Pattern Recognition and Machine Learning" by Christopher Bishop
-  - "Deep Learning" by Ian Goodfellow, Yoshua Bengio, and Aaron Courville
-- Courses:
-  - Coursera's "Machine Learning" by Andrew Ng
-  - Udacity's "Deep Learning Nanodegree"
-
-### 7. **Projects** (Hands-on experience)
-- Image Classification using CNNs
-- Time Series Forecasting using RNNs
-- Face Recognition using Transfer Learning
-- Audio Classification or Speech Recognition
-- Generative Art using GANs
-
