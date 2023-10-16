@@ -13,7 +13,7 @@ Given a function defined by a set of parameters, gradient descent starts with an
 
 ## Types of Gradient Descent
 - `Batch Gradient Descent:` Uses the entire training set to compute the gradient at each step. It can be computationally expensive for large datasets.
- `Stochastic Gradient Descent (SGD):` Uses only one training example at each step. This introduces a lot of variance and can lead to erratic convergence, but often converges much faster.
+- `Stochastic Gradient Descent (SGD):` Uses only one training example at each step. This introduces a lot of variance and can lead to erratic convergence, but often converges much faster.
 - `Mini-batch Gradient Descent:` A compromise between batch and stochastic versions. It uses a subset of the training data at each step.
 
 ## Key Hyperparameter: Learning Rate
