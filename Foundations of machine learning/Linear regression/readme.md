@@ -1,4 +1,28 @@
-# Using a machine learning library
+# Regression analysis
+Regression analysis is a way of estimating the relationship between a dependent variable and one or more independent variables, which is used for prediction.
+
+# Linear regression
+Linear regression is used for predicting a continuous outcome variable (also known as the dependent variable) from one or more predictor variables (also known as independent variables or features).<br>
+The objective of linear regression is to find the best-fitting straight line that accurately predict the output values.<br>
+The function that predicts the output values is called `H`ypothesis:<br>
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3247fc32-1810-48f7-9dc2-c00dedef1659)<br>
+
+## Cost Function
+The cost function means the error or discrepancy between the predicted values and the actual values in a model.<br>
+The prediction is done by minimizing the cost function.<br>
+The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/f7fe5bef-ed8b-49d4-b920-1aa1634ba459)<br>
+#### Where:
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/a65880ae-6d5c-4e5d-9955-5c907a7b3f6d)
+
+## Learning:
+The learning process is done by adjusting the weights (coefficients) using optimization techniques like gradient descent to minimize the cost function.
+
+## Multiple Linear Regression:
+When there are more than one independent variables, the equation becomes:
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/c9f8ec14-ca79-423a-82b4-3f5b86c27a09)
+
+# Example code using a machine learning library
 ~~~python
 import numpy as np
 import matplotlib.pyplot as plt
