@@ -13,7 +13,9 @@ The prediction is done by minimizing the cost function.<br>
 The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/f7fe5bef-ed8b-49d4-b920-1aa1634ba459)<br>
 #### Where:
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/a65880ae-6d5c-4e5d-9955-5c907a7b3f6d)
+- n is the number of training examples
+- y is the actual output for the i-th input
+- H is the predicted output for the i-th input
 
 ## Learning:
 The learning process is done by adjusting the weights (coefficients) using optimization techniques like gradient descent to minimize the cost function.
