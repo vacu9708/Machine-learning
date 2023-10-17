@@ -2,14 +2,18 @@
 Regression analysis is a way of estimating the relationship between a dependent variable and one or more independent variables, which is used for prediction.
 
 # Linear regression
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/856cd7af-8bc0-4a81-9328-c976e91aa969)
+
 Linear regression is used for predicting a continuous outcome variable (also known as the dependent variable) from one or more predictor variables (also known as independent variables or features).<br>
 The objective of linear regression is to find the best-fitting straight line that accurately predict the output values.<br>
-The function that predicts the output values is called `H`ypothesis:<br>
+A function that is set up to predict the output values is called `H`ypothesis:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3247fc32-1810-48f7-9dc2-c00dedef1659)<br>
 
-## Cost Function
+## Cost function and learning
 The cost function means the error or discrepancy between the predicted values and the actual values in a model.<br>
-The prediction is done by minimizing the cost function.<br>
+The task of finding the parameters(w and b) that minimize the cost function is called learning or optimization algorithm. Optimization algorithms include the **gradient descent**.
+
+## Cost function for linear regression
 The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/f7fe5bef-ed8b-49d4-b920-1aa1634ba459)<br>
 #### Where:
@@ -17,11 +21,8 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 - y is the actual output for the i-th input
 - H is the predicted output for the i-th input
 
-## Learning:
-The learning process is done by adjusting the weights (coefficients) using optimization techniques like gradient descent to minimize the cost function.
-
 ## Multiple Linear Regression:
-When there are more than one independent variables, the equation becomes:
+When there are more than one independent variables, the equation becomes:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/c9f8ec14-ca79-423a-82b4-3f5b86c27a09)
 
 # Example code using a machine learning library
