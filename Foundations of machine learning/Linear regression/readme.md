@@ -48,7 +48,7 @@ learning_rate = 0.1
 n_iterations = 100
 m = len(X)
 
-# Add bias term to X
+# Add bias term to X for matrix dot product
 X_b = np.c_[X, np.full((m, 1),1)]
 
 # Initialize parameters randomly
@@ -56,7 +56,7 @@ hypothesis = np.random.randn(2, 1)
 
 # Define cost function
 def cost_function(hypothesis):
-    return np.sum(np.square(X_b.dot(hypothesis) - y)) / m
+    return np.sum(np.square(X_b.dot(hypothesis) - y)) / m # X_b.dot(hypothesis) is the predicted y(= putting the x point into the hypothesis function)
 
 # Numerical gradient function
 def numerical_gradient(f, x, h=1e-5):
