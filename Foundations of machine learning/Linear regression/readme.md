@@ -22,6 +22,11 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 - y is the actual output for the i-th input
 - H is the predicted output for the i-th input
 
+## Gradient descent on MSE
+### 1. Numerical gradient
+
+### 2. Derivative
+
 ## Multiple Linear Regression:
 When there are more than one independent variables, the equation becomes:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/c9f8ec14-ca79-423a-82b4-3f5b86c27a09)
