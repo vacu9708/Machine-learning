@@ -24,6 +24,8 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 
 ## Gradient descent on MSE
 ### 1. Numerical gradient
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/0fd173a7-1d5f-47b9-b8bd-2d27548be5fe)<br>
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e08e707d-66f4-45ef-a9f7-fdaf23595e31)
 
 ### 2. Derivative
 
@@ -31,7 +33,7 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 When there are more than one independent variables, the equation becomes:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/c9f8ec14-ca79-423a-82b4-3f5b86c27a09)
 
-# Example code using gradient descent with the numerical gradient
+# Example code using numerical gradient
 ~~~python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,42 +49,42 @@ n_iterations = 100
 m = len(X)
 
 # Add bias term to X
-X_b = np.c_[np.full((m, 1),1), X]
+X_b = np.c_[X, np.full((m, 1),1)]
 
-# Initialize parameters (beta) randomly
-beta = np.random.randn(2, 1)
+# Initialize parameters randomly
+hypothesis = np.random.randn(2, 1)
 
 # Define cost function
-def cost_function(beta):
-    return np.sum(np.square(X_b.dot(beta) - y)) / m
+def cost_function(hypothesis):
+    return np.sum(np.square(X_b.dot(hypothesis) - y)) / m
 
 # Numerical gradient function
 def numerical_gradient(f, x, h=1e-5):
     grads = np.zeros_like(x)
     for i in range(x.shape[0]):
         for j in range(x.shape[1]):
-            tmp_val = x[i][j]
+            tmp = x[i][j]
             # f(x+h) calculation
-            x[i][j] = tmp_val + h
+            x[i][j] = tmp + h
             fxh1 = f(x)
             
             # f(x-h) calculation
-            x[i][j] = tmp_val - h
+            x[i][j] = tmp - h
             fxh2 = f(x)
             
             grads[i][j] = (fxh1 - fxh2) / (2*h)
-            x[i][j] = tmp_val
+            x[i][j] = tmp
     return grads
 
 # Gradient Descent using numerical gradient
 for iteration in range(n_iterations):
-    gradients = numerical_gradient(cost_function, beta)
-    beta -= learning_rate * gradients
+    gradients = numerical_gradient(cost_function, hypothesis)
+    hypothesis -= learning_rate * gradients
 
 # Making predictions
 X_new = np.array([[0], [2]])
-X_new_b = np.c_[np.ones((2, 1)), X_new]
-y_predict = X_new_b.dot(beta)
+X_new_b = np.c_[X_new, np.ones((2, 1))]
+y_predict = X_new_b.dot(hypothesis)
 
 # Plotting the data points and regression line
 plt.scatter(X, y, color='blue', s=30)
@@ -95,7 +97,7 @@ plt.show()
 ## Result
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/5cfd9b48-70ff-4038-9917-11a9fa973d8b)
 
-# Example code using gradient descent with the derivative
+# Example code using the derivative
 ~~~python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -113,18 +115,18 @@ m = len(X)
 # Add bias term to X
 X_b = np.c_[np.full((m, 1),1), X]
 
-# Initialize parameters (beta) randomly
-beta = np.random.randn(2, 1)
+# Initialize parameters randomly
+hypothesis = np.random.randn(2, 1)
 
 # Gradient Descent
 for iteration in range(n_iterations):
-    gradients = 2/m * X_b.T.dot(X_b.dot(beta) - y) # Found by taking the partial derivative of the cost function
-    beta -= learning_rate * gradients
+    gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y) # Found by taking the partial derivative of the cost function
+    hypothesis -= learning_rate * gradients
 
 # Making predictions
 X_new = np.array([[0], [2]])
 X_new_b = np.c_[np.ones((2, 1)), X_new]
-y_predict = X_new_b.dot(beta)
+y_predict = X_new_b.dot(hypothesis)
 # Plotting the data points and regression line
 plt.scatter(X, y, color='blue', s=30)
 plt.plot(X_new, y_predict, "r-")
@@ -132,38 +134,4 @@ plt.title("Linear Regression with Gradient Descent")
 plt.xlabel("X")
 plt.ylabel("y")
 plt.show()
-~~~
-
-# Using normal equation
-~~~python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Generate sample data
-np.random.seed(0)
-X = 2 * np.random.rand(100, 1)
-y = 4 + 3 * X + np.random.randn(100, 1)
-
-# Add a bias term (x0 = 1) for every sample to handle the intercept
-X_b = np.c_[np.ones((100, 1)), X]  # Add x0 = 1 for all samples
-
-# Calculate the parameters using the normal equation
-theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
-
-# Predictions using the computed parameters
-X_new = np.array([[0], [2]])
-X_new_b = np.c_[np.ones((2, 1)), X_new]  # Add x0 = 1 for all samples
-y_predict = X_new_b.dot(theta_best)
-
-# Plot the results
-plt.scatter(X, y, color='blue', label="True values")
-plt.plot(X_new, y_predict, 'r-', label="Predicted line")
-plt.xlabel("X")
-plt.ylabel("y")
-plt.legend()
-plt.title("Simple Linear Regression from Scratch")
-plt.show()
-
-print("y-intercept (beta_0):", theta_best[0][0])
-print("Slope (beta_1):", theta_best[1][0])
 ~~~
