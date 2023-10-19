@@ -64,8 +64,6 @@ plt.xlabel("X")
 plt.ylabel("y")
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/66b3b99a-88a5-4413-98ec-2edfece4fbcb)<br>
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e25360d2-cc6f-4941-8dd8-da0c360585eb)
 
 # Using normal equation
 ~~~python
