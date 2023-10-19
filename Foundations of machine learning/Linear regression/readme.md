@@ -25,54 +25,49 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 When there are more than one independent variables, the equation becomes:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/c9f8ec14-ca79-423a-82b4-3f5b86c27a09)
 
-# Example code using a machine learning library
+# Example code using gradient descent
 ~~~python
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
 
-# Generate sample data
-np.random.seed(1)
+# Generate some random data for demonstration
+np.random.seed(0)
 X = 2 * np.random.rand(100, 1)
 y = 4 + 3 * X + np.random.randn(100, 1)
 
-# Split data into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-print(X_train[0],X_test[0],y_train[0],y_test[0])
-# Create a linear regression model
-lin_reg = LinearRegression()
+# Hyperparameters
+learning_rate = 0.1
+n_iterations = 1000
+m = len(X)
 
-# Fit the model to the training data
-lin_reg.fit(X_train, y_train)
+# Add bias term to X
+X_b = np.c_[np.ones((m, 1)), X]
 
-# Print the coefficients
-print("y-intercept (beta_0):", lin_reg.intercept_[0])
-print("Slope (beta_1):", lin_reg.coef_[0][0])
+# Initialize parameters (beta) randomly
+beta = np.random.randn(2, 1)
 
-# Predict on test data
-y_pred = lin_reg.predict(X_test)
+# Gradient Descent
+for iteration in range(n_iterations):
+    gradients = 2/m * X_b.T.dot(X_b.dot(beta) - y)
+    beta -= learning_rate * gradients
 
-# Calculate mean squared error
-mse = mean_squared_error(y_test, y_pred)
-print("Mean Squared Error:", mse)
-# Plot the results
-plt.scatter(X_test, y_test, color='blue', label="True values")
-plt.plot(X_test, y_pred, 'r.', label="Predicted values")
-# plot X and y with a small dot
+# Making predictions
+X_new = np.array([[0], [2]])
+X_new_b = np.c_[np.ones((2, 1)), X_new]
+y_predict = X_new_b.dot(beta)
+
+# Plotting the data points and regression line
+plt.scatter(X, y, color='blue', s=30)
+plt.plot(X_new, y_predict, "r-")
+plt.title("Linear Regression with Gradient Descent")
 plt.xlabel("X")
 plt.ylabel("y")
-plt.legend()
-plt.title("Simple Linear Regression")
-plt.figure(2)
-plt.scatter(X, y)
 plt.show()
 ~~~
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/66b3b99a-88a5-4413-98ec-2edfece4fbcb)<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e25360d2-cc6f-4941-8dd8-da0c360585eb)
 
-# From scratch
+# Using normal equation
 ~~~python
 import numpy as np
 import matplotlib.pyplot as plt
