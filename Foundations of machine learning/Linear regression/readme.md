@@ -12,7 +12,7 @@ A function that is set up to predict the output values is called `H`ypothesis:<b
 ## Cost function and learning
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/1474a959-44e2-4d21-b9bb-66556668fd4d)<br>
 The cost function means the error or discrepancy between the predicted values and the actual values in a model.<br>
-The task of finding the parameters(such as w and b) that minimize the cost function is called **learning** or **optimization**. Optimization methdos include the **gradient descent**, using the **derivative**, etc.
+The task of finding the parameters(such as w and b) that minimize the cost function is called **learning** or **optimization**. Optimization methods include the **gradient descent**, using the **derivative**, etc.
 
 ## Cost function for linear regression
 The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
@@ -26,11 +26,11 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 - differentiated with respect to H(w and b)
 
 ## Learning methods
-### 1. Numerical gradient
+### 1. Numerical gradient(partial differentiation with respect to w and b respectively)
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/0fd173a7-1d5f-47b9-b8bd-2d27548be5fe)<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e08e707d-66f4-45ef-a9f7-fdaf23595e31)
 
-### 2. Derivative
+### 2. Derivative(partial)
 
 ## Multiple Linear Regression:
 When there are more than one independent variables, the equation becomes:<br>
@@ -123,7 +123,9 @@ hypothesis = np.random.randn(2, 1)
 
 # Gradient Descent
 for iteration in range(n_iterations):
-    gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y) # Found by taking the partial derivative of the cost function
+    # Take the partial derivative of the cost function
+    # T in X_b.T is needed to align X_b correctly for the dot product
+    gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y)
     hypothesis -= learning_rate * gradients
 
 # Making predictions
