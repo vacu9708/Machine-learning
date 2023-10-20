@@ -124,7 +124,7 @@ hypothesis = np.random.randn(2, 1)
 # Gradient Descent
 for iteration in range(n_iterations):
     # Take the partial derivative of the cost function
-    # T in X_b.T is needed to align X_b correctly for the dot product
+    # The T in X_b.T is needed to align X_b correctly for the dot product
     gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y)
     hypothesis -= learning_rate * gradients
 
