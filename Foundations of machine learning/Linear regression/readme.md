@@ -23,7 +23,7 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 - H is the predicted output for the i-th input
 #### Differentiation
 - x and y are constant values
-- differentiated with respect to H(w and b)
+- Partial differentiation with respect to H(w and b respectively)
 
 ## Learning methods
 ### 1. Numerical gradient(partial differentiation with respect to w and b respectively)
@@ -31,6 +31,10 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e08e707d-66f4-45ef-a9f7-fdaf23595e31)
 
 ### 2. Derivative(partial)
+- With respect to w:
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/a69c141d-72af-4860-832b-e004e00ab307)
+- With respect to b:
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/a078c1c9-a406-4b41-9103-b86b9f383c66)
 
 ## Multiple Linear Regression:
 When there are more than one independent variables, the equation becomes:<br>
@@ -59,7 +63,8 @@ hypothesis = np.random.randn(2, 1)
 
 # Define cost function
 def cost_function(hypothesis):
-    return np.sum(np.square(X_b.dot(hypothesis) - y)) / m # X_b.dot(hypothesis) is the predicted y(= putting the x point into the hypothesis function)
+    # X_b.dot(hypothesis) means to substitute x points for the hypothesis to find the sequence of predicted y points
+    return np.sum(np.square(X_b.dot(hypothesis) - y)) / m
 
 # Numerical gradient function
 def numerical_gradient(f, x, h=1e-5):
@@ -123,8 +128,8 @@ hypothesis = np.random.randn(2, 1)
 
 # Gradient Descent
 for iteration in range(n_iterations):
-    # Take the partial derivative of the cost function
-    # The T in X_b.T is needed to align X_b for the dot product
+    # Use the partial derivatives of the cost function with respect to w and b respectively
+    # The T in X_b.T is needed to align X_b for the dot product, which serves as the sum of the sequence
     gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y)
     hypothesis -= learning_rate * gradients
 
