@@ -12,7 +12,7 @@ A function that is set up to predict the output values is called `H`ypothesis:<b
 ## Cost function and learning
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/1474a959-44e2-4d21-b9bb-66556668fd4d)<br>
 The cost function means the error or discrepancy between the predicted values and the actual values in a model.<br>
-The task of finding the parameters(w and b) that minimize the cost function is called **learning** or **optimization**. Optimization algorithms include the **gradient descent**.
+The task of finding the parameters(such as w and b) that minimize the cost function is called **learning** or **optimization**. Optimization methdos include the **gradient descent**, using the **derivative**, etc.
 
 ## Cost function for linear regression
 The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
@@ -21,8 +21,11 @@ The cost function for linear regression is the Mean Squared Error (MSE), and it 
 - n is the number of training examples
 - y is the actual output for the i-th input
 - H is the predicted output for the i-th input
+#### Differentiation
+- x and y are constant values
+- differentiated with respect to H(w and b)
 
-## Gradient descent on MSE
+## Learning methods
 ### 1. Numerical gradient
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/0fd173a7-1d5f-47b9-b8bd-2d27548be5fe)<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/e08e707d-66f4-45ef-a9f7-fdaf23595e31)
