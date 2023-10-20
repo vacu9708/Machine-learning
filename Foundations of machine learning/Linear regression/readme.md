@@ -55,7 +55,7 @@ learning_rate = 0.1
 n_iterations = 100
 m = len(X)
 
-# Add bias term to X for matrix dot product
+# Add bias term 1 to X for dot product
 X_b = np.c_[X, np.full((m, 1),1)]
 
 # Initialize parameters randomly
@@ -120,7 +120,7 @@ learning_rate = 0.1
 n_iterations = 1000
 m = len(X)
 
-# Add bias term to X
+# Add bias term 1 to X for dot product
 X_b = np.c_[np.full((m, 1),1), X]
 
 # Initialize parameters randomly
@@ -129,7 +129,7 @@ hypothesis = np.random.randn(2, 1)
 # Gradient Descent
 for iteration in range(n_iterations):
     # Use the partial derivatives of the cost function with respect to w and b respectively
-    # The T in X_b.T is needed to align X_b for the dot product, which serves as the sum of the sequence
+    # The T in X_b.T is needed to align X_b for the dot product
     gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y)
     hypothesis -= learning_rate * gradients
 
