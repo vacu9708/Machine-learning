@@ -1,3 +1,9 @@
+# Logistic regression
+Logistic Regression is used for binary classification tasks - where the goal is to predict categorical labels that are either one thing or another (e.g., spam or not spam).
+
+### 1. Binary outcome
+Logistic regression is a type of regression analysis that is well-suited for predicting the probability of an event when the response variable is categorical. In particular, it's often used for binary classification tasks, where the goal is to categorize instances into one of two classes.
+
 ## Purpose
 To predict the probability that a given instance belongs to a particular category.
 
@@ -6,65 +12,56 @@ To predict the probability that a given instance belongs to a particular categor
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 1. Generate synthetic data
-np.random.seed(42)
-age = np.random.uniform(20, 80, 100)
-sick = (age > 50).astype(int)
-# exceptions = np.random.normal(0, 10, 100)
-# sick = (age + exceptions > 50).astype(int)
+# Generate some data
+np.random.seed(0)
+age = np.random.uniform(20, 80, 100)  # Random ages between 20 and 80
+sick = (age > 50).astype(int)  # Sick if age > 50
 
-# 2. Logistic Regression from scratch
+# Logistic regression from scratch
+def compute_cost(y, hypothesis):
+    return -np.mean(y * np.log(hypothesis) + (1-y) * np.log(1-hypothesis))
 
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
-def compute_loss(y, y_pred):
-    return -np.mean(y * np.log(y_pred) + (1-y) * np.log(1-y_pred))
-
-def logistic_regression(X, y, lr=0.01, epochs=50000):
+def logistic_regression(X, y, epoch, learning_rate):
     m, n = X.shape
-    weights = np.zeros(n)
-    bias = 0
-    
-    for epoch in range(epochs):
-        linear_model = np.dot(X, weights) + bias
-        y_pred = sigmoid(linear_model)
-        
-        # Gradient Descent
-        dw = (1/m) * np.dot(X.T, (y_pred - y))
-        db = (1/m) * np.sum(y_pred - y)
-        
-        weights -= lr * dw
-        bias -= lr * db
-        
-        if epoch % 1000 == 0:
-            print(f"Epoch {epoch}, Loss: {compute_loss(y, y_pred)}")
-    print(f"Epoch {epoch}, Loss: {compute_loss(y, y_pred)}")
-    
-    return weights, bias
+    hypothesis_params = np.zeros(n)
+    for epoch in range(epoch):
+        linear_hypothesis = np.dot(X, hypothesis_params)
+        hypothesis = sigmoid(linear_hypothesis)
+        gradient = np.dot(X.T, (hypothesis - y)) / m
+        hypothesis_params -= learning_rate * gradient
 
-# Adding bias term by appending a column of ones to our features
-X = np.c_[np.ones(age.shape[0]), age]
+        if epoch % 1000 == 0:
+            print(f"Epoch {epoch}, Loss: {compute_cost(y, hypothesis)}")
+            
+    print(f"Epoch {epoch}, Loss: {compute_cost(y, hypothesis)}")
+    return hypothesis_params
+
+# Prepare data
+X = np.c_[np.ones(len(age)), age]  # Add a column of ones for the bias term
 y = sick
 
-weights, bias = logistic_regression(X, y)
+# Train the logistic regression model
+num_iterations = 20000
+learning_rate = 0.01
+hypothesis_params = logistic_regression(X, y, num_iterations, learning_rate)
 
-# 3. Visualization
-ages_range = np.linspace(20, 80, 1000)
-probabilities = sigmoid(np.dot(np.c_[np.ones(ages_range.shape[0]), ages_range], weights) + bias)
-# Find the age where the probability crosses 0.5 (Decision Boundary)
-decision_boundary_age = ages_range[np.abs(probabilities - 0.5).argmin()]
-
-plt.scatter(age, sick, c=sick, cmap='rainbow', label='Data')
+# Visualization
+plt.figure(figsize=(10, 6))
+plt.scatter(age, sick, color='blue', label='Data')
+x_values = np.linspace(20, 80, 100)
+x_test = np.c_[np.ones(100), x_values]  # Add a column of ones for the bias term
+y_values = sigmoid(np.dot(x_test, hypothesis_params))
+plt.plot(x_values, y_values, color='red', label='Probability curve')
+plt.axvline(x=-hypothesis_params[0]/hypothesis_params[1], color='green', linestyle='--', label='Decision boundary')
 plt.xlabel('Age')
 plt.ylabel('Sick')
-plt.plot(ages_range, probabilities, color='black', label='Predicted Probabilities')
-plt.axvline(x=decision_boundary_age, color='red', linestyle='--', label='Decision Boundary')
 plt.legend()
-plt.title('Logistic Regression with Decision Boundary')
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/0fa8d7ba-5098-4fce-9754-97333f398007)
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3789a675-7ecf-49ce-b464-f7ebc9cd0fb6)
 
 ### Code using a library
 ~~~python
