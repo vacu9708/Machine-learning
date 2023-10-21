@@ -108,5 +108,4 @@ plt.ylabel('Feature 2')
 plt.legend()
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/dfe420d0-ee0d-4298-b88b-19f65949a824)
-
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/8f99efbe-993b-4302-a323-123eb24f792b)
