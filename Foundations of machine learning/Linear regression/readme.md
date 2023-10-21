@@ -126,19 +126,21 @@ m = len(X)
 X_b = np.c_[np.full((m, 1),1), X]
 
 # Initialize parameters randomly
-hypothesis = np.random.randn(2, 1)
+hypothesis_params = np.random.randn(2, 1)
 
 # Gradient Descent
 for iteration in range(n_iterations):
     # Use the partial derivatives of the cost function with respect to w and b respectively
     # The T in X_b.T is needed to align X_b for the dot product
-    gradients = 2/m * X_b.T.dot(X_b.dot(hypothesis) - y)
-    hypothesis -= learning_rate * gradients
+    gradients = 2/m *
+    hypothesis = X_b.dot(hypothesis_params)
+X_b.T.dot(hypothesis - y)
+    hypothesis_params -= learning_rate * gradients
 
 # Making predictions
 X_new = np.array([[0], [2]])
 X_new_b = np.c_[np.ones((2, 1)), X_new]
-y_predict = X_new_b.dot(hypothesis)
+y_predict = X_new_b.dot(hypothesis_params)
 # Plotting the data points and regression line
 plt.scatter(X, y, color='blue', s=30)
 plt.plot(X_new, y_predict, "r-")
