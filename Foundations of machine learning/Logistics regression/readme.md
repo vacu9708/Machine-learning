@@ -62,6 +62,7 @@ plt.legend()
 plt.title('Logistic Regression from Scratch')
 plt.show()
 ~~~
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/95d0fe93-1745-4bac-9cb0-73d62828d691)
 
 ### Code using a library
 ~~~python
