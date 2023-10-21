@@ -5,8 +5,8 @@ Regression analysis is a way of estimating the relationship between a dependent 
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/856cd7af-8bc0-4a81-9328-c976e91aa969)
 
 Linear regression is used for predicting a continuous outcome variable (also known as the dependent variable) from one or more predictor variables (also known as independent variables or features).<br>
-The objective of linear regression is to find the best-fitting straight line that predict the data.<br>
-The functions that are set up to find the predicted data are called `H`ypothesis:<br>
+The objective of linear regression is to find the best-fitting straight line that predict the output values.<br>
+The candidate functions that are set up to find the best predicted function are called `H`ypothesis:<br>
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3247fc32-1810-48f7-9dc2-c00dedef1659)<br>
 
 ## Cost function and learning
@@ -14,7 +14,7 @@ The functions that are set up to find the predicted data are called `H`ypothesis
 The cost function refers to the error or discrepancy between the predicted values and the actual values in a model.<br>
 The task of finding the parameters(such as w and b of the Hypothesis) that minimize the cost function is called **learning** or **optimization**.<br>
 Optimization methods include **gradient descent**, using the **derivative**, etc.<br>
-The best hypothesis is used to predict the data.
+The best hypothesis is the result of Linear regression and used to predict the output values.
 
 ## Cost function for linear regression
 The cost function for linear regression is the Mean Squared Error (MSE), and it is given by:<br>
