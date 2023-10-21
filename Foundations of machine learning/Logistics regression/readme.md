@@ -22,11 +22,6 @@ To predict the probability that a given instance belongs to a particular categor
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Generate some data
-np.random.seed(0)
-age = np.random.uniform(20, 80, 100)  # Random ages between 20 and 80
-sick = (age > 50).astype(int)  # Sick if age > 50
-
 # Logistic regression from scratch
 def compute_cost(y, hypothesis):
     return -np.mean(y * np.log(hypothesis) + (1-y) * np.log(1-hypothesis))
@@ -49,8 +44,17 @@ def logistic_regression(X, y, epoch, learning_rate):
     print(f"Epoch {epoch}, Loss: {compute_cost(y, hypothesis)}")
     return hypothesis_params
 
-# Prepare data
-X = np.c_[np.ones(len(age)), age]  # Add a column of ones for the bias term
+def predict(X, hypothesis_params):
+    linear_hypothesis = np.dot(X, hypothesis_params)
+    hypothesis = sigmoid(linear_hypothesis)
+    predictions = (hypothesis > 0.5).astype(int)  # Threshold of 0.5 to classify as 0 or 1
+    return predictions
+
+# Generate training data
+np.random.seed(0)
+ages = np.random.uniform(20, 80, 100)  # Random ages between 20 and 80
+sick = (ages > 50).astype(int)  # Sick if age > 50
+X = np.c_[np.ones(len(ages)), ages]  # Add a column of ones for the bias term
 y = sick
 
 # Train the logistic regression model
@@ -58,12 +62,19 @@ num_iterations = 20000
 learning_rate = 0.01
 hypothesis_params = logistic_regression(X, y, num_iterations, learning_rate)
 
+# Example predictions
+test_ages = np.array([25, 55, 75])
+test_X = np.c_[np.ones(len(test_ages)), test_ages]  # Add a column of ones for the bias term
+predictions = predict(test_X, hypothesis_params)
+for age, prediction in zip(test_ages, predictions):
+    print(f"Age: {age}, Predicted Sick: {prediction}")
+
 # Visualization
 plt.figure(figsize=(10, 6))
-plt.scatter(age, sick, color='blue', label='Training data')
+plt.scatter(ages, sick, color='blue', label='Training data')
 x_values = np.linspace(20, 80, 100)
-x_test = np.c_[np.ones(100), x_values]  # Add a column of ones for the bias term
-y_values = sigmoid(np.dot(x_test, hypothesis_params))
+X_values = np.c_[np.ones(100), x_values]  # Add a column of ones for the bias term
+y_values = sigmoid(np.dot(X_values, hypothesis_params))
 plt.plot(x_values, y_values, color='red', label='Probability curve')
 plt.axvline(x=-hypothesis_params[0]/hypothesis_params[1], color='green', linestyle='--', label='Decision boundary')
 plt.xlabel('Age')
@@ -71,7 +82,8 @@ plt.ylabel('Sick')
 plt.legend()
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/fcacd957-95ea-4cad-8f91-f55d062ef0d0)
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/fcacd957-95ea-4cad-8f91-f55d062ef0d0)<br>
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3deafb5a-db94-4b5b-98ce-3607107248e1)
 
 ### Code using a library
 ~~~python
