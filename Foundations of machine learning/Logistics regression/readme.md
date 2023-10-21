@@ -77,42 +77,57 @@ plt.show()
 ~~~python
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.datasets import make_classification
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn import datasets
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from scipy.special import expit
 
-# Generate a dataset
-X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
-                           n_clusters_per_class=1, n_samples=100)
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+# Load the iris dataset
+iris = datasets.load_iris()
+X = iris.data[:, :2]  # we only take the first two features for visualization
+y = (iris.target != 0) * 1  # convert the target to binary
 
-# Standardize features by removing the mean and scaling to unit variance
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+# Fit logistic regression model
+log_reg = LogisticRegression()
+log_reg.fit(X, y)
 
-# Create and fit the model
-model = LogisticRegression()
-model.fit(X_train, y_train)
+# Define the sigmoid function
+def sigmoid(x1, x2, theta_0, theta_1, theta_2):
+    z = theta_0 + theta_1 * x1 + theta_2 * x2
+    return expit(z)
 
-# Visualizing the Training set results
-from matplotlib.colors import ListedColormap
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 1, stop = X_set[:, 0].max() + 1, step = 0.01),
-                     np.arange(start = X_set[:, 1].min() - 1, stop = X_set[:, 1].max() + 1, step = 0.01))
-plt.contourf(X1, X2, model.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-             alpha = 0.75, cmap = ListedColormap(('red', 'green')))
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
-                c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('Logistic Regression (Training set)')
-plt.xlabel('Feature 1')
-plt.ylabel('Feature 2')
-plt.legend()
+# Get the coefficients from logistic regression model
+theta_0 = log_reg.intercept_[0]
+theta_1, theta_2 = log_reg.coef_.T
+
+# Create a mesh grid for plotting
+h = .02  # step size in the mesh
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+
+# Get the sigmoid output for every point in the mesh grid
+Z = sigmoid(xx.ravel(), yy.ravel(), theta_0, theta_1, theta_2)
+Z = Z.reshape(xx.shape)
+
+# 3D Visualization
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the sigmoid surface
+ax.plot_surface(xx, yy, Z, alpha=0.8, cmap='viridis')
+
+# Plot the training data
+ax.scatter(X[y==0][:, 0], X[y==0][:, 1], np.zeros((X[y==0].shape[0])), color='red', label='Class 0')
+ax.scatter(X[y==1][:, 0], X[y==1][:, 1], np.ones((X[y==1].shape[0])), color='blue', label='Class 1')
+
+# Decision boundary is where sigmoid = 0.5, i.e., z = 0
+ax.contour(xx, yy, Z, levels=[0.5], colors='black')
+
+ax.set_xlabel('Feature 1')
+ax.set_ylabel('Feature 2')
+ax.set_zlabel('Sigmoid Output')
+ax.legend()
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/8f99efbe-993b-4302-a323-123eb24f792b)
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/bbfb5182-2220-4ffa-ba9b-33151aa17f53)
