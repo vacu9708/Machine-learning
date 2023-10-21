@@ -1,8 +1,18 @@
 # Logistic regression
 Logistic Regression is used for binary classification tasks - where the goal is to predict categorical labels that are either one thing or another (e.g., spam or not spam).
 
-### 1. Binary outcome
-Logistic regression is a type of regression analysis that is well-suited for predicting the probability of an event when the response variable is categorical. In particular, it's often used for binary classification tasks, where the goal is to categorize instances into one of two classes.
+### Binary Classification:
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/dfa4a74a-15df-441c-9952-a49fbbc5e6e1)<br>
+Logistic Regression estimates the probability that a given input point belongs to a certain class. The probability estimation is done through the logistic function, which is an S-shaped curve (Sigmoid function).<br>
+Logistic regression can be extended to multiclass classification (called Multinomial Logistic Regression) by using techniques like one-vs-rest (OvR).
+
+### Parameter Estimation
+Logistic regression performs learning by minimizing the cost function just like linear regression.<br>
+The predicted function is a linear function in linear regression while it is a sigmoid function in logistic regression.
+The parameters of the logistic regression model are estimated using a method called Maximum Likelihood Estimation (MLE). MLE aims to find the parameters that maximize the likelihood of observing the given data.
+
+### Decision Boundary:
+Logistic regression creates a linear decision boundary in the feature space, separating the two classes. The decision boundary is where the estimated probability is 0.5. Observations on one side of the boundary are classified into one category, and observations on the other side are classified into the other category.
 
 ## Purpose
 To predict the probability that a given instance belongs to a particular category.
@@ -50,7 +60,7 @@ hypothesis_params = logistic_regression(X, y, num_iterations, learning_rate)
 
 # Visualization
 plt.figure(figsize=(10, 6))
-plt.scatter(age, sick, color='blue', label='Data')
+plt.scatter(age, sick, color='blue', label='Training data')
 x_values = np.linspace(20, 80, 100)
 x_test = np.c_[np.ones(100), x_values]  # Add a column of ones for the bias term
 y_values = sigmoid(np.dot(x_test, hypothesis_params))
@@ -61,7 +71,7 @@ plt.ylabel('Sick')
 plt.legend()
 plt.show()
 ~~~
-![image](https://github.com/vacu9708/Machine-learning/assets/67142421/3789a675-7ecf-49ce-b464-f7ebc9cd0fb6)
+![image](https://github.com/vacu9708/Machine-learning/assets/67142421/fcacd957-95ea-4cad-8f91-f55d062ef0d0)
 
 ### Code using a library
 ~~~python
