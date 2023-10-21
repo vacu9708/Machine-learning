@@ -35,8 +35,8 @@ def logistic_regression(X, y, epoch, learning_rate):
     for epoch in range(epoch):
         linear_hypothesis = np.dot(X, hypothesis_params)
         hypothesis = sigmoid(linear_hypothesis)
-        gradient = np.dot(X.T, (hypothesis - y)) / m
-        hypothesis_params -= learning_rate * gradient
+        gradients = np.dot(X.T, (hypothesis - y)) / m
+        hypothesis_params -= learning_rate * gradients
 
         if epoch % 1000 == 0:
             print(f"Epoch {epoch}, Loss: {compute_cost(y, hypothesis)}")
