@@ -133,7 +133,7 @@ for iteration in range(n_iterations):
     # Use the partial derivatives of the cost function with respect to w and b respectively
     # The T in X_b.T is needed to align X_b for the dot product
     hypothesis = X_b.dot(hypothesis_params)
-    gradients = 2/m *X_b.T.dot(hypothesis - y)
+    gradients = 2/m * X_b.T.dot(hypothesis - y)
     hypothesis_params -= learning_rate * gradients
 
 # Making predictions
