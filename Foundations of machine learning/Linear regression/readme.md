@@ -68,7 +68,7 @@ def cost_function(hypothesis):
     # X_b.dot(hypothesis) means to substitute x points for the hypothesis to find the sequence of predicted y points
     return np.sum(np.square(X_b.dot(hypothesis) - y)) / m
 
-# Numerical gradient function
+# Numerical gradient function(Put a hypothesis x in the cost function f)
 def numerical_gradient(f, x, h=1e-5):
     grads = np.zeros_like(x)
     for i in range(x.shape[0]):
