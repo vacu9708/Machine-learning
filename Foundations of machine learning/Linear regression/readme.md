@@ -11,9 +11,9 @@ The candidate functions that are set up to find the best predicted function are 
 
 ## Cost function and learning
 ![image](https://github.com/vacu9708/Machine-learning/assets/67142421/1474a959-44e2-4d21-b9bb-66556668fd4d)<br>
-The cost function refers to the error or discrepancy between the predicted values and the actual values in a model.<br>
-The task of finding the parameters(such as w and b of the Hypothesis) that minimize the cost function is called **learning** or **optimization**.<br>
-Optimization methods include **gradient descent**, using the **derivative**, etc.<br>
+The cost function refers to the error or discrepancy between the predicted values and the actual values in a model.
+- The task of finding the parameters(such as w and b of the Hypothesis) that minimize the cost function is called **learning** or **optimization**.
+- Optimization methods include **gradient descent**, finding the analytic solution with the **derivative**, etc, which are applied to the cost function.
 The best hypothesis is the result of Linear regression and used to predict the output values.
 
 ## Cost function for linear regression
